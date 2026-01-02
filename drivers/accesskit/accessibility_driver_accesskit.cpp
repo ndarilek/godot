@@ -671,7 +671,7 @@ void AccessibilityDriverAccessKit::accessibility_update_set_name(const RID &p_id
 	_ensure_node(p_id, ae);
 
 	ae->name = p_name;
-	String full_name = ae->name + " " + ae->name_extra_info;
+	String full_name = (ae->name + " " + ae->name_extra_info).strip_edges();
 	if (!full_name.is_empty()) {
 		accesskit_node_set_label(ae->node, full_name.utf8().ptr());
 	} else {
@@ -687,7 +687,7 @@ void AccessibilityDriverAccessKit::accessibility_update_set_extra_info(const RID
 	_ensure_node(p_id, ae);
 
 	ae->name_extra_info = p_name_extra_info;
-	String full_name = ae->name + " " + ae->name_extra_info;
+	String full_name = (ae->name + " " + ae->name_extra_info).strip_edges();
 	if (!full_name.is_empty()) {
 		accesskit_node_set_label(ae->node, full_name.utf8().ptr());
 	} else {
@@ -1659,6 +1659,8 @@ AccessibilityDriverAccessKit::AccessibilityDriverAccessKit() {
 	role_map[DisplayServer::AccessibilityRole::ROLE_DIALOG] = ACCESSKIT_ROLE_DIALOG;
 	role_map[DisplayServer::AccessibilityRole::ROLE_TOOLTIP] = ACCESSKIT_ROLE_TOOLTIP;
 	role_map[DisplayServer::AccessibilityRole::ROLE_REGION] = ACCESSKIT_ROLE_REGION;
+	role_map[DisplayServer::AccessibilityRole::ROLE_DISCLOSURE_TRIANGLE] = ACCESSKIT_ROLE_DISCLOSURE_TRIANGLE;
+	role_map[DisplayServer::AccessibilityRole::ROLE_TREE_GRID] = ACCESSKIT_ROLE_TREE_GRID;
 
 	action_map[DisplayServer::AccessibilityAction::ACTION_CLICK] = ACCESSKIT_ACTION_CLICK;
 	action_map[DisplayServer::AccessibilityAction::ACTION_FOCUS] = ACCESSKIT_ACTION_FOCUS;
